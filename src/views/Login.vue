@@ -1,6 +1,7 @@
 <template>
   <div id="login">
     <section>
+      <PasswordReset v-if="showPasswordReset" @close="togglePasswordReset"></PasswordReset>
       <div class="col1">
         <h1>Jackrabbit Rent-A-Car</h1>
         <p>Welcome to the <router-link to ="/">Jackrabbit Rent-A-Car</router-link> web app.
@@ -19,7 +20,7 @@
           </div>
           <button class="button" @click="login()">Log In</button>
           <div class="extras">
-            <router-link to = "">Forgot Password</router-link>
+            <a @click="togglePasswordReset()">Forgot Password</a>
             <router-link to = "/signup">Create an Account</router-link>
           </div>
         </form>
@@ -29,24 +30,31 @@
 </template>
 
 <script>
+import PasswordReset from '@/components/ResetPassword'
 export default {
   data() {
     return {
       loginForm: {
         email: '',
         password: ''
-      }
+      },
+      showPasswordReset: false
     }
   },
+  components:{
+    PasswordReset
+  },
   methods: {
-  login() {
-    this.$store.dispatch('login', {
-      email: this.loginForm.email,
-      password: this.loginForm.password
-    })
-
-    
-  }
+    login() {
+      this.$store.dispatch('login', {
+        email: this.loginForm.email,
+        password: this.loginForm.password
+      })
+   
+    },
+    togglePasswordReset(){
+      this.showPasswordReset = !this.showPasswordReset
+   }
   }
 }
 </script>
