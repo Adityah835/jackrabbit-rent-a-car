@@ -5,7 +5,7 @@ import router from '../router/index'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     userProfile: {}
   },
@@ -19,11 +19,11 @@ export default new Vuex.Store({
       // sign user in
       const user  = await fb.auth.signInWithEmailAndPassword(form.email, form.password)
       .then(() =>
-        dispatch('fetchUserProfile', user),
-        window.location.reload()
+        dispatch('fetchUserProfile', user)
       )
-      .catch(error => window(error.message))
-             
+      .catch((error) => console.error(error))
+      
+      window.location.reload()
       // fetch user profile and set in state
 
     },
@@ -36,10 +36,11 @@ export default new Vuex.Store({
       
       // change route to dashboard
       router.push('/')
-    },
+    },  
     async signup({ dispatch }, form){
       //sign user up
       const { user } = await fb.auth.createUserWithEmailAndPassword(form.email, form.password)
+      .catch(() => window.alert('User Email already taken'))
       
       await fb.usersCollection.doc(user.uid).set({
         firstname: form.firstname,
@@ -47,21 +48,24 @@ export default new Vuex.Store({
         title: form.title,
         phoneno: form.phoneno,
         email: form.email,
-        type: '',
+        isAdmin: false,
+        isEmployee: false
       })
 
       //fetch user profile and set in state
-      dispatch('fecthUserProfile', user)
+      dispatch('fetchUserProfile', user)
     },
     async logout({ commit }){
       await fb.auth.signOut()
 
-      commit('SetUserProfile', {})
+      commit('setUserProfile', {})
       router.push('/login')
 
-      window.location.reload()
-    }
+    },
+    
   },
   modules: {
   }
 })
+
+export default store

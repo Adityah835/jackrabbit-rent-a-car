@@ -20,6 +20,14 @@ const routes = [
     }
   },
   {
+    path: '/inventory',
+    name: 'Inventory',
+    component: () => import (/* webpackChunkName: "rent-cars" */ '../views/Inventory.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
@@ -38,6 +46,11 @@ const routes = [
     path: '/about-us',
     name: 'About Us',
     component: () => import(/* webpackChunkName: "about-us" */ '../views/AboutUs.vue')
+  },
+  {
+    path: '/manage-employees',
+    name: 'Manage Employees',
+    component: () => import(/* webpackChunkName: "manage-employees" */ '../views/ManageEmployees.vue')
   }
     
 ]

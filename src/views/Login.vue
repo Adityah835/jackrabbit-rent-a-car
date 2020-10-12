@@ -20,7 +20,7 @@
           </div>
           <button class="button" @click="login()">Log In</button>
           <div class="extras">
-            <a @click="togglePasswordReset()">Forgot Password</a>
+            <a @click="togglePasswordReset()">Forgot Password?</a>
             <router-link to = "/signup">Create an Account</router-link>
           </div>
         </form>
