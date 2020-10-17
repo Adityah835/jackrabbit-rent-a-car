@@ -22,6 +22,9 @@
                             <li> <router-link to="/inventory"> Inventory </router-link></li>
                             <li><a @click="logout()"> Logout </a></li>
                         </ul>
+                        <ul class = "inline">
+                            <li> <a @click="logout()"> Logout </a> </li>
+                        </ul>
                     </ul>
 
                 </ul>
@@ -31,7 +34,6 @@
 </template>
 <script>
 import { auth } from '../firebase'
-//import * as fb from '../firebase'
 import { mapState } from 'vuex'
 
 export default {

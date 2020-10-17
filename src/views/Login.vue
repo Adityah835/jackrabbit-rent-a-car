@@ -18,10 +18,10 @@
             <label for="password1">Password</label>
             <input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" />
           </div>
-          <button class="button" @click="login()">Log In</button>
+          <button class="button" @click="login(), checkdata()">Log In</button>
           <div class="extras">
             <a @click="togglePasswordReset()">Forgot Password?</a>
-            <router-link to = "/signup">Create an Account</router-link>
+            <router-link to = "/signup">Create Customer Account</router-link>
           </div>
         </form>
       </div>
@@ -46,15 +46,21 @@ export default {
   },
   methods: {
     login() {
-      this.$store.dispatch('login', {
+        this.$store.dispatch('login', {
         email: this.loginForm.email,
         password: this.loginForm.password
       })
-   
+      .catch(function(response){
+        console.log(response)
+      })
+     
     },
     togglePasswordReset(){
       this.showPasswordReset = !this.showPasswordReset
-   }
+    },
+    checkdata(){
+
+    }
   }
 }
 </script>

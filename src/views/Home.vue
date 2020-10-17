@@ -2,7 +2,7 @@
     <div id = "home">
         <section>
         <div class='col1'>
-            <h3>Welcome!</h3>
+            <h3>Welcome {{userProfile.firstname}}!</h3>
             <h5>To the seamless car renting experience..</h5>
             
         </div>
@@ -13,6 +13,15 @@
         </section>
     </div>
 </template>
+<script>
+import { mapState } from 'vuex'
+
+export default {
+    computed:{
+        ...mapState(['userProfile'])
+    },
+}
+</script>
 <style lang="scss">
     .button{
         background-color: #30A0EE;

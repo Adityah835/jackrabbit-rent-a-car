@@ -20,10 +20,26 @@ const routes = [
     }
   },
   {
+    path: '/new-reservation',
+    name: 'New Reservation',
+    component: () => import (/* webpackChunkName: "new-reservation" */ '../views/NewReservation.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/inventory',
     name: 'Inventory',
     component: () => import (/* webpackChunkName: "rent-cars" */ '../views/Inventory.vue'),
     meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/manage-employees',
+    name: 'Manage Employees',
+    component: () => import(/* webpackChunkName: "manage-employees" */ '../views/ManageEmployees.vue'),
+    meta:{
       requiresAuth: true
     }
   },
@@ -38,6 +54,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "signup" */ '../views/SignUp.vue')
   },
   {
+    path: '/employee-signup',
+    name: 'Employee Sign Up',
+    component: () => import(/* webpackChunkName: "employee-signup" */ '../views/EmployeeSignUp.vue'),
+    meta:{
+      requiresAuth: true
+    }
+  },
+  {
     path: '/locations',
     name: 'Locations',
     component: () => import(/* webpackChunkName: "locations" */ '../views/Locations.vue')
@@ -46,13 +70,7 @@ const routes = [
     path: '/about-us',
     name: 'About Us',
     component: () => import(/* webpackChunkName: "about-us" */ '../views/AboutUs.vue')
-  },
-  {
-    path: '/manage-employees',
-    name: 'Manage Employees',
-    component: () => import(/* webpackChunkName: "manage-employees" */ '../views/ManageEmployees.vue')
-  }
-    
+  } 
 ]
 
 const router = new VueRouter({
