@@ -18,7 +18,8 @@
             <label for="password1">Password</label>
             <input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" />
           </div>
-          <button class="button" @click="login(), checkdata()">Log In</button>
+          <p v-if ="errorMsg != ''" class = "error"> {{errorMsg}} </p>
+          <button class="button" @click="login()">Log In</button>
           <div class="extras">
             <a @click="togglePasswordReset()">Forgot Password?</a>
             <router-link to = "/signup">Create Customer Account</router-link>
@@ -38,6 +39,7 @@ export default {
         email: '',
         password: ''
       },
+      errorMsg: '',
       showPasswordReset: false
     }
   },
@@ -45,22 +47,33 @@ export default {
     PasswordReset
   },
   methods: {
-    login() {
-        this.$store.dispatch('login', {
-        email: this.loginForm.email,
-        password: this.loginForm.password
-      })
-      .catch(function(response){
-        console.log(response)
-      })
+    async login() {
+        
+        this.errorMsg = ''
+
+        await this.$store.dispatch('login', {
+          email: this.loginForm.email,
+          password: this.loginForm.password
+        })
+        .catch((error) => {
+          console.error(error)
+          this.errorMsg = error
+        })
+
+        if(this.errorMsg == ''){
+          window.location.reload()
+        }
      
     },
     togglePasswordReset(){
       this.showPasswordReset = !this.showPasswordReset
-    },
-    checkdata(){
-
     }
   }
 }
 </script>
+<style lang="scss">
+  .error {
+    color: tomato;
+    font-size: 12px;
+  }
+</style>

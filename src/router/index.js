@@ -20,14 +20,6 @@ const routes = [
     }
   },
   {
-    path: '/new-reservation',
-    name: 'New Reservation',
-    component: () => import (/* webpackChunkName: "new-reservation" */ '../views/NewReservation.vue'),
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
     path: '/inventory',
     name: 'Inventory',
     component: () => import (/* webpackChunkName: "rent-cars" */ '../views/Inventory.vue'),
@@ -70,7 +62,12 @@ const routes = [
     path: '/about-us',
     name: 'About Us',
     component: () => import(/* webpackChunkName: "about-us" */ '../views/AboutUs.vue')
-  } 
+  },
+  {
+    path: '/new-reservation',
+    name: 'New Reservation',
+    component: () => import(/* webpackChunkName: "new-reservation" */ '../views/NewReservation.vue')
+  }
 ]
 
 const router = new VueRouter({

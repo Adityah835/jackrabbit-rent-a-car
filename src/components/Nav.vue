@@ -22,8 +22,8 @@
                             <li> <router-link to="/inventory"> Inventory </router-link></li>
                             <li><a @click="logout()"> Logout </a></li>
                         </ul>
-                        <ul class = "inline">
-                            <li> <a @click="logout()"> Logout </a> </li>
+                        <ul v-if = "userProfile.isAdmin === false" class = "inline">
+                            <li v-if = "userProfile.isEmployee === false"> <a @click="logout()"> Logout </a> </li>
                         </ul>
                     </ul>
 

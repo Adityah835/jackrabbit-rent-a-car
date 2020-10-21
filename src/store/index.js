@@ -10,7 +10,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     userProfile: {},
-    secondaryUserProfile: {}
+    secondaryUserProfile: {},
+    location: {}
   },
   mutations: {
     setUserProfile(state, val) {
@@ -18,25 +19,25 @@ const store = new Vuex.Store({
     },
     setSecondaryUserProfile(state, val) {
       state.secondaryUserProfile = val
-  }
+    },
+    setPreferredLocation(state, val){
+      state.location = val
+    }
   },
   actions: {
     async login({ dispatch }, form) {
-      
-      console.log('inside login dispatch')
-      
+           
       // sign user in
       const user  = await fb.auth.signInWithEmailAndPassword(form.email, form.password)
       .then((response) =>{
         dispatch('fetchUserProfile', user)
         console.log(response)
       })
-      .catch((error) => {
-        console.error(error)
-        alert(error)
-      })
+      //.catch((error) => {
+      //  console.error(error)
+        //alert(error)
+      //})
       
-      window.location.reload()
       // fetch user profile and set in state
 
     },
@@ -102,6 +103,11 @@ const store = new Vuex.Store({
 
       commit('setUserProfile', {})
     },
+    async setLocation({ commit }, location){
+      
+      commit('setPreferredLocation', location)
+
+    }
     
   },
   modules: {

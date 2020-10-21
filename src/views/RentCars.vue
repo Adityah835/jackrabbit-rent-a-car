@@ -1,7 +1,8 @@
 <template>
     <div id = "dashboard">
         <section>
-            <div>
+            <SelectLocation v-if="showSelectLocation" @close="toggleSelectLocation"></SelectLocation>
+            <div class = "col2">
                 <h2>Welcome {{userProfile.firstname}}! </h2>
                 <h4>Start your car reservation rental or check you current reservations! </h4>    
             </div>
@@ -9,17 +10,32 @@
     
         <section>
             <div class="col2">
-                <router-link to = "/new-reservation"><button class = "button2" type="button">Make a New Reservation</button></router-link>
+                <a @click="toggleSelectLocation()"><button class = "button2" type="button">Make a New Reservation</button></a>
                 <a><button class ="button2" type="button">View/Modify/Cancel Reservation</button></a>
             </div>
         </section>
     </div>
 </template>
 <script>
+import SelectLocation from '@/components/SelectLocation.vue'
 import { mapState } from 'vuex'
+
 export default {
+    data() {
+        return {
+            showSelectLocation: false
+        }
+    },
+    methods:{
+        toggleSelectLocation(){
+            this.showSelectLocation = !this.showSelectLocation
+        }
+    },
     computed:{
         ...mapState(['userProfile'])
+    },
+    components:{
+        SelectLocation
     }
 }
 </script>
