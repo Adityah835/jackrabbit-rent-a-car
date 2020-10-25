@@ -67,15 +67,29 @@ export default {
     },
     methods:{
         signupEmployee(){
-            this.$store.dispatch('signupEmployee',{
-                email: this.signupForm.email,
-                password: this.signupForm.password,
-                firstname: this.signupForm.firstname,
-                lastname: this.signupForm.lastname,
-                title: this.signupForm.title,
-                phoneno: this.signupForm.phoneno,
-                accountType: this.signupForm.accountType
-            })
+
+            if (this.signupForm.accountType === "Employee"){
+                this.$store.dispatch('signupEmployee',{
+                    email: this.signupForm.email,
+                    password: this.signupForm.password,
+                    firstname: this.signupForm.firstname,
+                    lastname: this.signupForm.lastname,
+                    title: this.signupForm.title,
+                    phoneno: this.signupForm.phoneno
+                })
+            }
+            else if(this.signupForm.accountType === "Admin"){
+                this.$store.dispatch('signupAdmin',{
+                    email: this.signupForm.email,
+                    password: this.signupForm.password,
+                    firstname: this.signupForm.firstname,
+                    lastname: this.signupForm.lastname,
+                    title: this.signupForm.title,
+                    phoneno: this.signupForm.phoneno
+                })
+                .catch((response) => {alert(response)})
+            }
+            
         }
     }
 }

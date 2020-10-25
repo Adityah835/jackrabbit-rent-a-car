@@ -33,13 +33,6 @@ const store = new Vuex.Store({
         dispatch('fetchUserProfile', user)
         console.log(response)
       })
-      //.catch((error) => {
-      //  console.error(error)
-        //alert(error)
-      //})
-      
-      // fetch user profile and set in state
-
     },
     async fetchUserProfile({ commit }, user) {
       
@@ -78,9 +71,6 @@ const store = new Vuex.Store({
       var secondaryApp = secondary.App
      
       await secondaryApp.auth().createUserWithEmailAndPassword(form.email, form.password)
-        .then(function(fireBaseUser){
-          console.log("User" + fireBaseUser.uid + " created successfully")
-        })
         .catch(() => window.alert('User Email already taken'))
 
         
@@ -94,23 +84,50 @@ const store = new Vuex.Store({
         isEmployee: true
       })
 
-      //fetch user profile and set in state
-      commit()
-      //dispatch('fetchUserProfile', user)
+      commit('setSecondaryUserProfile' , {})
+      
+      router.push('/manage-employees')
     },
+
+    async signupAdmin({ commit }, form){
+      //work in progress  
+      var secondaryApp = secondary.App
+     
+      await secondaryApp.auth().createUserWithEmailAndPassword(form.email, form.password)
+        .catch(() => window.alert('User Email already taken'))
+
+        
+      await fb.usersCollection.doc(secondaryApp.auth().currentUser.uid).set({
+        firstname: form.firstname,
+        lastname: form.lastname,
+        title: form.title,
+        phoneno: form.phoneno,
+        email: form.email,
+        isAdmin: true,
+        isEmployee: false
+      })
+      
+      secondaryApp.auth().signOut()
+           
+      commit('setSecondaryUserProfile' , {})
+      
+      router.push('/manage-employees')
+
+      
+    },
+
     async logout({ commit }){
       await fb.auth.signOut()
 
       commit('setUserProfile', {})
     },
+
     async setLocation({ commit }, location){
       
       commit('setPreferredLocation', location)
 
     }
     
-  },
-  modules: {
   }
 })
 

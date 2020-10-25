@@ -66,7 +66,10 @@ const routes = [
   {
     path: '/new-reservation',
     name: 'New Reservation',
-    component: () => import(/* webpackChunkName: "new-reservation" */ '../views/NewReservation.vue')
+    component: () => import(/* webpackChunkName: "new-reservation" */ '../views/NewReservation.vue'),
+    meta:{
+      requiresAuth: true
+    }
   }
 ]
 
