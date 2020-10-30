@@ -70,6 +70,14 @@ const routes = [
     meta:{
       requiresAuth: true
     }
+  },
+  {
+    path: '/reservation-success',
+    name: 'Reservation Success',
+    component: () => import(/* webpackChunkName: "reservation-success" */ '../views/ReservationSuccess.vue'),
+    meta:{
+      requiresAuth: true
+    }
   }
 ]
 

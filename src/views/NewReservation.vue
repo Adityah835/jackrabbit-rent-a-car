@@ -60,7 +60,7 @@
                 </div>
                 
                 <div class="extras">
-                    <button class="button">Reserve Ride</button>
+                    <button @click="newReservation()" class="button">Reserve Ride</button>
                     <p> </p>
                     <router-link to="/rent-cars">Back to Rent Cars Dashboard</router-link>
                 </div>
@@ -86,7 +86,6 @@ export default {
                 lastname: '',
                 email:'',
                 phoneno:'',
-                location: '',
                 carType: '',
                 pickupdate:'11/01/2020 12:00',
                 dropoffdate:'11/02/2020 12:00',
@@ -100,6 +99,18 @@ export default {
         isPastDate(date){
             const currentDate = new Date()
             return date <= currentDate
+        },
+        newReservation(){
+            this.$store.dispatch('newReservation',{
+                firstname: this.reservationForm.firstname,
+                lastname: this.reservationForm.lastname,
+                email: this.reservationForm.email,
+                phoneno:this.reservationForm.phoneno,
+                location: this.$store.state.location.location,
+                carType: this.reservationForm.carType,
+                pickupdate: this.reservationForm.pickupdate,
+                dropoffdate: this.reservationForm.dropoffdate
+            })
         }
 
     }

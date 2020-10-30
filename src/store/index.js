@@ -126,6 +126,27 @@ const store = new Vuex.Store({
       
       commit('setPreferredLocation', location)
 
+    },
+
+    async newReservation({ commit }, form){
+      
+      const userEmail = fb.auth.currentUser.email
+           
+      await fb.reservations.doc().set({
+        accountemail: userEmail,
+        firstname: form.firstname,
+        lastname: form.lastname,
+        driveremail: form.email,
+        phoneno: form.phoneno,
+        location: form.location,
+        carType: form.carType,
+        pickupdate: form.pickupdate,
+        dropoffdate: form.dropoffdate
+      })
+      .then(() => router.push('/reservation-success'))
+
+      commit()
+
     }
     
   }
