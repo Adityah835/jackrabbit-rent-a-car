@@ -43,7 +43,6 @@ export default {
             try{
                 console.log(this.tempReserve)
                 await fb.reservations.doc(this.tempReserve.reservationId).delete()
-                //await fb.auth.currentUser.delete()
                 this.$store.commit('setTempReserve', {})
                 this.IsSuccess = true
             }

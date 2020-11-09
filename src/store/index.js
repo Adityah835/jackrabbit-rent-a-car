@@ -177,18 +177,31 @@ const store = new Vuex.Store({
       .then(function(querySnapshot) {
         commit('setReservations', querySnapshot)
         router.push('/view-reservations')
-        
-        //remove
-        //querySnapshot.forEach(function(doc){
-        //  console.log(doc.data())
-        //})
-        //
 
       })
       .catch(() => console.error('there is an error in setViewReservations in store/index.js'))
 
       commit()
       
+    },
+    async modifyReservation({commit}, form){
+
+      await fb.reservations.doc(form.reservationId).update({
+        //accountemail: form.accountemail,
+        firstname: form.firstname,
+        lastname: form.lastname,
+        driveremail: form.email,
+        phoneno: form.phoneno,
+        location: form.location,
+        carType: form.carType,
+        pickupdate: form.pickupdate,
+        dropoffdate: form.dropoffdate
+      })
+      .then(() => router.push('/reservation-success'))
+      .catch(() => console.log(' '))
+
+      commit()
+
     }
     
   }

@@ -86,6 +86,14 @@ const routes = [
     meta:{
       requiresAuth: true
     }
+  },
+  {
+    path: '/modify-reservation',
+    name: 'Modify Reservation',
+    component: () => import(/* webpackChunkName: "modify-reservation" */ '../views/ModifyReservation.vue'),
+    meta:{
+      requiresAuth: true
+    }
   }
 ]
 

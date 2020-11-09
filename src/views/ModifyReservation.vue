@@ -1,0 +1,122 @@
+<template>
+    <div id="signup-form">
+        <section>
+            <form @submit.prevent>
+                <div class = "col1">
+                <h3>Modify your Reservation @ {{ tempReserve.location }}</h3>
+                </div>
+                <div class = "col1">
+                <div>
+                    <label>Driver's First Name</label>
+                    <input v-model.trim="reservationForm.firstname" class = "option-select" type="text" placeholder = "John" id="firstname2"/>
+                </div>
+                <div>
+                    <label>Driver's Last Name</label>
+                    <input v-model.trim="reservationForm.lastname" class = "option-select" type="text" placeholder = "Doe" id="lastname2"/>
+                </div>
+                <div>
+                    <label>Phone Number</label>
+                    <input v-model.trim="reservationForm.phoneno" class = "option-select" type="text" placeholder = "XXX-XXX-XXXX" id="phoneno2"/>
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input v-model.trim="reservationForm.email" class = "option-select" type="text" placeholder = "you@gmail.com" id="email3"/>
+                </div>
+                <div>
+                    <label>Pick Up Date</label>
+                    <date-pick 
+                        v-model="reservationForm.pickupdate"
+                        :pickTime="true"
+                        :use12HourClock="true"
+                        :format="'MM-DD-YYYY HH:mm'"
+                        :displayFormat="'MM/DD/YYYY H:mm A'"
+                        :isDateDisabled="isPastDate"
+
+                        class = "option-select"
+                    ></date-pick>
+                </div>
+                <div>
+                    <label>Drop off Date</label>
+                    <date-pick 
+                        v-model="reservationForm.dropoffdate"
+                        :pickTime="true"
+                        :use12HourClock="true"
+                        :format="'MM-DD-YYYY HH:mm'"
+                        :displayFormat="'MM/DD/YYYY H:mm A'"
+                        :isDateDisabled="isPastDate"
+
+                        class = "option-select"
+                    ></date-pick>
+                </div>
+                <div>
+                    <label> Car Type </label>
+                    <select v-model.trim ="reservationForm.carType" class = "option-select">
+                                <option disabled value = ""> Select</option>
+                                <option value = "Sedan"> Sedan </option>
+                                <option value = "SUV"> SUV </option>
+                                <option value = "Hatchback"> Hatchback </option>
+                                <option value = "Mini Van"> Mini Van </option>
+                            </select>
+                </div>
+                
+                <div class="extras">
+                    <button @click="modifyReservation()" class="button">Change Reservation</button>
+                    <p> </p>
+                    <router-link to="/rent-cars">Back to Rent Cars Dashboard</router-link>
+                </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</template>
+<script>
+import { mapState } from 'vuex'
+import DatePick from 'vue-date-pick'
+import 'vue-date-pick/dist/vueDatePick.css'
+
+
+export default {
+    components:{
+        DatePick
+    },
+    data(){
+        return{
+            reservationForm:{
+                firstname: this.$store.state.tempReserve.firstname,
+                lastname: this.$store.state.tempReserve.lastname,
+                email:this.$store.state.tempReserve.driveremail,
+                phoneno:this.$store.state.tempReserve.phoneno,
+                carType: this.$store.state.tempReserve.carType,
+                pickupdate:this.$store.state.tempReserve.pickupdate,
+                dropoffdate:this.$store.state.tempReserve.dropoffdate,
+                reservationId:this.$store.state.tempReserve.reservationId,
+                location:this.$store.state.tempReserve.location
+            },
+        }
+    },
+    computed:{
+        ...mapState(['userProfile', 'location', 'tempReserve'])
+    },
+    methods:{
+        isPastDate(date){
+            const currentDate = new Date()
+            return date <= currentDate
+        },
+        modifyReservation(){
+            
+            this.$store.dispatch('modifyReservation',{
+                firstname: this.reservationForm.firstname,
+                lastname: this.reservationForm.lastname,
+                email: this.reservationForm.email,
+                phoneno:this.reservationForm.phoneno,
+                location: this.reservationForm.location,
+                carType: this.reservationForm.carType,
+                pickupdate: this.reservationForm.pickupdate,
+                dropoffdate: this.reservationForm.dropoffdate,
+                reservationId: this.reservationForm.reservationId
+            })
+        }
+
+    }
+}
+</script>

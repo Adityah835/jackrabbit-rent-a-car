@@ -18,7 +18,7 @@
                     <p> <strong>Driver's Phone No:</strong> {{ reserve.phoneno }} </p>
                     <p> <strong>Car Preference:</strong> {{ reserve.carType }}</p>  
                     <ul class="align-right">
-                        <li><a> Change Reservation </a></li>
+                        <li><a @click="modifyReservation(reserve)"> Change Reservation </a></li>
                         <li><a class="a-critical" @click="toggleCancelReservation(reserve)"> Cancel Reservation </a></li>
                     </ul>                  
                 </div>            
@@ -36,7 +36,7 @@
 <script>
 import {mapState} from 'vuex'
 import CancelReservation from '@/components/CancelReservation'
-
+import router from '../router/index'
 
 export default {
     computed:{
@@ -53,9 +53,11 @@ export default {
     methods:{
         toggleCancelReservation(reservation){
             this.showDeleteReservation = !this.showDeleteReservation
-            console.log(reservation.reservationId)
-
             this.$store.commit('setTempReserve', reservation)
+        },
+        modifyReservation(reservation){
+            this.$store.commit('setTempReserve', reservation)
+            router.push('/modify-reservation')
         }
     }
 }
