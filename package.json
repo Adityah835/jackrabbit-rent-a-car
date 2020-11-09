@@ -11,6 +11,8 @@
     "core-js": "^3.6.5",
     "firebase": "^7.22.0",
     "firebase-admin": "^9.2.0",
+    "gridjs-vue": "^0.5.2",
+    "nodemailer": "^6.4.14",
     "vue": "^2.6.11",
     "vue-date-pick": "^1.4.1",
     "vue-router": "^3.2.0",

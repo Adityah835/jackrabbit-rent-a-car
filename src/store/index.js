@@ -11,7 +11,9 @@ const store = new Vuex.Store({
   state: {
     userProfile: {},
     secondaryUserProfile: {},
-    location: {}
+    location: {},
+    reservations: [],
+    tempReserve: []
   },
   mutations: {
     setUserProfile(state, val) {
@@ -22,6 +24,21 @@ const store = new Vuex.Store({
     },
     setPreferredLocation(state, val){
       state.location = val
+    },
+    setReservations(state, val){
+      if(val == {}){
+        state.reservations = val
+      }
+      else{
+        val.forEach(function(doc){
+
+          state.reservations.push(doc.data())
+
+        })
+      }
+    },
+    setTempReserve(state, val){
+      state.tempReserve = val
     }
   },
   actions: {
@@ -120,6 +137,8 @@ const store = new Vuex.Store({
       await fb.auth.signOut()
 
       commit('setUserProfile', {})
+      commit('setReservations', {})
+      commit('setPreferredLocation', {})
     },
 
     async setLocation({ commit }, location){
@@ -130,10 +149,11 @@ const store = new Vuex.Store({
 
     async newReservation({ commit }, form){
       
-      const userEmail = fb.auth.currentUser.email
-           
-      await fb.reservations.doc().set({
-        accountemail: userEmail,
+      
+      const docId = await fb.reservations.doc().id
+
+      await fb.reservations.doc(docId).set({
+        accountemail: form.accountemail,
         firstname: form.firstname,
         lastname: form.lastname,
         driveremail: form.email,
@@ -141,12 +161,34 @@ const store = new Vuex.Store({
         location: form.location,
         carType: form.carType,
         pickupdate: form.pickupdate,
-        dropoffdate: form.dropoffdate
+        dropoffdate: form.dropoffdate,
+        reservationId: docId
       })
       .then(() => router.push('/reservation-success'))
-
+      .catch(() => console.log(' '))
+      
       commit()
 
+    },
+    async setViewReservations({commit}, val){
+      
+      await fb.reservations.where('accountemail', '==', val)
+      .get()
+      .then(function(querySnapshot) {
+        commit('setReservations', querySnapshot)
+        router.push('/view-reservations')
+        
+        //remove
+        //querySnapshot.forEach(function(doc){
+        //  console.log(doc.data())
+        //})
+        //
+
+      })
+      .catch(() => console.error('there is an error in setViewReservations in store/index.js'))
+
+      commit()
+      
     }
     
   }

@@ -78,6 +78,14 @@ const routes = [
     meta:{
       requiresAuth: true
     }
+  },
+  {
+    path: '/view-reservations',
+    name: 'View Reservations',
+    component: () => import(/* webpackChunkName: "view-reservations" */ '../views/ViewReservations.vue'),
+    meta:{
+      requiresAuth: true
+    }
   }
 ]
 
@@ -95,6 +103,7 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
+  
 })
 
 export default router

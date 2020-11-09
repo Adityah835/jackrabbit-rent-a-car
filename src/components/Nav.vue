@@ -2,9 +2,9 @@
     <header>
         <section>
             <div class = "col1">
-                <router-link to = "/"> 
+                <a href = "/"> 
                     <h3>Jackrabbit Rent-A-Car</h3> 
-                </router-link>
+                </a>
                
                 <ul class = "inline">
                     <li><router-link to = "/rent-cars"> Rent Cars </router-link></li>

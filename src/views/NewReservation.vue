@@ -71,7 +71,7 @@
 </template>
 <script>
 import { mapState } from 'vuex'
-
+import * as fb from '../firebase'
 import DatePick from 'vue-date-pick'
 import 'vue-date-pick/dist/vueDatePick.css'
 
@@ -102,6 +102,7 @@ export default {
         },
         newReservation(){
             this.$store.dispatch('newReservation',{
+                accountemail: fb.auth.currentUser.email,
                 firstname: this.reservationForm.firstname,
                 lastname: this.reservationForm.lastname,
                 email: this.reservationForm.email,
