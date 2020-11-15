@@ -131,6 +131,9 @@ export default {
             if(/^\d+$/.test(this.signupForm.phoneno) == false){
                 this.PhoneNumberErrorMsg = 'Phone Number must only contains digits 0-9'
             }
+            else if(this.signupForm.phoneno.length != 10){
+                this.PhoneNumberErrorMsg = 'Phone Number must be 10 digits'
+            }
         },
         signup(){
 

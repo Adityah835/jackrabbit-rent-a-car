@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div @click="$emit('close')" class = "close"> Close</div>
                 <div>
-                    <h3> Select Location </h3>
+                    <h3> Select Pick Up Location </h3>
                     <p> </p>
                     <form @submit.prevent>
                        <div>

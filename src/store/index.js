@@ -15,7 +15,8 @@ const store = new Vuex.Store({
     reservations: [],
     tempReserve: [],
     carInventory: [],
-    pickUpCarInventory: []
+    pickUpCarInventory: [],
+    employees: []
   },
   mutations: {
     setUserProfile(state, val) {
@@ -71,6 +72,20 @@ const store = new Vuex.Store({
         val.forEach(function(doc){
           if(state.tempReserve.location == doc.data().location){
             state.pickUpCarInventory.push(doc.data())
+          }
+        })
+      }
+    },
+    setEmployees(state, val){
+      if(val.length == 0){
+        state.employees = []
+      }
+      else{
+        state.employees = []
+
+        val.forEach(function(doc){
+          if(doc.data().isAdmin == true || doc.data().isEmployee == true){
+            state.employees.push(doc.data())
           }
         })
       }
@@ -193,7 +208,8 @@ const store = new Vuex.Store({
         lastname: form.lastname,
         driveremail: form.email,
         phoneno: form.phoneno,
-        location: form.location,
+        pickuplocation: form.pickuplocation,
+        dropofflocation: form.dropofflocation,
         carType: form.carType,
         pickupdate: form.pickupdate,
         dropoffdate: form.dropoffdate,
@@ -257,7 +273,20 @@ const store = new Vuex.Store({
         router.push('/pick-up-car')
       })
       .catch(() => console.error('there is an error in setInventory in store/index.js'))
-    }
+    },
+    async setViewEmployees({commit}){
+      
+      await fb.usersCollection.get()
+      .then(function(querySnapshot) {
+        
+        commit('setEmployees', querySnapshot)
+                
+        router.push('/view-employees')
+
+      })
+      .catch(() => console.error('there is an error in setViewEmployees in store/index.js'))
+      
+    },
     
   }
 })

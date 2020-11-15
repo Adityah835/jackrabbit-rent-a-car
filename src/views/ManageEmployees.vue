@@ -10,7 +10,7 @@
         <section>
             <div class="col2">
                 <router-link to = "/employee-signup"><button class = "button2" type="button">Add Employee</button></router-link>
-                <a><button class ="button2" type="button">View All Employees</button></a>
+                <a @click="setViewEmployees()"><button class ="button2" type="button">View All Employees</button></a>
             </div>
         </section>
     </div>
@@ -20,6 +20,11 @@ import { mapState } from 'vuex'
 export default {
     computed:{
         ...mapState(['userProfile'])
+    },
+    methods:{
+        setViewEmployees(){
+            this.$store.dispatch('setViewEmployees')
+        }
     }
 }
 </script>

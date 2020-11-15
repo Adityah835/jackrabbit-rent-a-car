@@ -9,15 +9,16 @@
             <div v-if = "reservations.length">
                 <p v-if="pickUpError" class = "p-critical"> Pick Up not allowed 1 day before the Reservation date </p>
                 <div v-for= "reserve in reservations" :key= "reserve.reservationId" class ="post" >
-                    <h5> {{ reserve.location}} </h5>
+                    <h5> {{ reserve.pickuplocation}} </h5>
                     <ul>
                         <li><p> <strong> Pickup Date: </strong> {{ reserve.pickupdate }}</p></li>
-                        <li><p> <strong> Drop off Date </strong> {{ reserve.dropoffdate }}</p></li>
+                        <li><p> <strong> Drop off Date: </strong> {{ reserve.dropoffdate }}</p></li>
                     </ul>
                     <p>- </p>
                     <p v-if= "reservationDetailsId === reserve.reservationId"> <strong>Driver's Name:</strong> {{ reserve.firstname }} {{ reserve.lastname }}</p>
                     <p v-if= "reservationDetailsId === reserve.reservationId"> <strong>Driver's Phone No:</strong> {{ reserve.phoneno }} </p>
-                    <p v-if= "reservationDetailsId === reserve.reservationId"> <strong>Car Preference:</strong> {{ reserve.carType }}</p>  
+                    <p v-if= "reservationDetailsId === reserve.reservationId"> <strong>Car Preference:</strong> {{ reserve.carType }}</p>
+                    <p v-if= "reservationDetailsId === reserve.reservationId"> <strong> Drop off Location: </strong> {{ reserve.dropofflocation }}</p>
                     <ul class="align-right" v-if= "reservationDetailsId === reserve.reservationId">
                         <li> <button class="button4" @click="pickUpCar(reserve)"> Pick Car </button> </li>
                         <li><a @click="modifyReservation(reserve)"> Change Reservation </a></li>
