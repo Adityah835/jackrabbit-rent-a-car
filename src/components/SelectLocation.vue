@@ -18,7 +18,7 @@
                     </form>
                     <p> </p>
                     <p v-if="errorMsg !== ''" class="error">{{ errorMsg }} </p>
-                    <router-link to = "/new-reservation"> <button class ="button3"> Select </button> </router-link>
+                    <a> <button class ="button3" @click="checkLocation()"> Select </button> </a>
                 </div>    
                 <p>  </p>
             </div>
@@ -28,6 +28,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import router from '../router/index'
 
 export default {
     data(){
@@ -51,6 +52,17 @@ export default {
             else{
                 this.$store.dispatch('setLocation', {location: this.selectedLocation})
                 this.IsSuccess = true
+            }
+        },
+        checkLocation(){
+            this.errorMsg = ''
+
+            if(this.selectedLocation == ''){
+                this.errorMsg = 'Please select a location before proceeding'
+            }
+            else{
+                this.$store.dispatch('setLocation', {location: this.selectedLocation})
+                router.push('/new-reservation')
             }
         }
     }

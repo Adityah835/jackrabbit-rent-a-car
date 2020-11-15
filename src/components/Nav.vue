@@ -14,12 +14,12 @@
                     
                     <ul v-if = "isLoggedIn() === true " class = "inline">
                         <ul v-if = "userProfile.isEmployee === true" class = "inline" >
-                            <li> <router-link to="/inventory"> Inventory </router-link></li>
+                            <li> <a @click="setInventory()"> Inventory </a></li>
                             <li><a @click="logout()"> Logout </a></li>
                         </ul>
                         <ul v-if = "userProfile.isAdmin === true" class = "inline" >
                             <li> <router-link to = "/manage-employees"> Manage Employees </router-link> </li>
-                            <li> <router-link to="/inventory"> Inventory </router-link></li>
+                            <li> <a @click="setInventory()"> Inventory </a></li>
                             <li><a @click="logout()"> Logout </a></li>
                         </ul>
                         <ul v-if = "userProfile.isAdmin === false" class = "inline">
@@ -47,7 +47,10 @@ export default {
         logout(){
             this.$store.dispatch('logout')
             window.location.reload()
-        },   
+        },
+        setInventory(){
+            this.$store.dispatch('setCarInventory')
+        }   
     }
 }
 </script>

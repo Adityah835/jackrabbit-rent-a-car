@@ -11,7 +11,7 @@
         <section>
             <div class="col2">
                 <a @click="toggleSelectLocation()"><button class = "button2" type="button">Make a New Reservation</button></a>
-                <a @click="setViewReservations()"><button class ="button2" type="button">View/Modify/Cancel Reservation</button></a>
+                <a @click="setViewReservations()"><button class ="button2" type="button">View Reservation (Pick Up Cars/ Cancel Reservation)</button></a>
             </div>
         </section>
     </div>

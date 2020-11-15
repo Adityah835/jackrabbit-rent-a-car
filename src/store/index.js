@@ -13,7 +13,8 @@ const store = new Vuex.Store({
     secondaryUserProfile: {},
     location: {},
     reservations: [],
-    tempReserve: []
+    tempReserve: [],
+    carInventory: []
   },
   mutations: {
     setUserProfile(state, val) {
@@ -30,6 +31,9 @@ const store = new Vuex.Store({
         state.reservations = val
       }
       else{
+
+        state.reservations = []
+
         val.forEach(function(doc){
 
           state.reservations.push(doc.data())
@@ -39,6 +43,20 @@ const store = new Vuex.Store({
     },
     setTempReserve(state, val){
       state.tempReserve = val
+    },
+    setInventory(state, val){
+      if(val.length == 0){
+        state.carInventory = []
+      }
+      else
+      {
+        
+        state.carInventory = []
+
+        val.forEach(function(doc){
+          state.carInventory.push(doc.data())
+        })
+      }
     }
   },
   actions: {
@@ -187,7 +205,6 @@ const store = new Vuex.Store({
     async modifyReservation({commit}, form){
 
       await fb.reservations.doc(form.reservationId).update({
-        //accountemail: form.accountemail,
         firstname: form.firstname,
         lastname: form.lastname,
         driveremail: form.email,
@@ -202,7 +219,18 @@ const store = new Vuex.Store({
 
       commit()
 
-    }
+    },
+    async setCarInventory({commit}){
+      
+      await fb.inventory.get()
+      .then(function(querySnapshot) {
+        
+        commit('setInventory', querySnapshot)
+
+        router.push('/inventory')
+      })
+      .catch(() => console.error('there is an error in setInventory in store/index.js'))
+    },
     
   }
 })
