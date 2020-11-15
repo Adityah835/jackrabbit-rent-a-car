@@ -94,6 +94,14 @@ const routes = [
     meta:{
       requiresAuth: true
     }
+  },
+  {
+    path: '/pick-up-car',
+    name: 'Pick Up Car',
+    component: () => import(/* webpackChunkName: "pick-up-car" */ '../views/PickUpCar.vue'),
+    meta:{
+      requiresAuth: true
+    }
   }
 ]
 

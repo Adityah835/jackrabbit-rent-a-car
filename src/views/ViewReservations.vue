@@ -96,15 +96,15 @@ export default {
                 && this.date.date - serverDate.toDate().getDate() >= 0){
                     
                     console.log('Pick up allowed')
-                    this.$store.commit('setTempReserve', reserve)
                     this.pickUpError = false
-
+                    this.$store.commit('setTempReserve', reserve)
+                    this.$store.dispatch('setPickUpInventory')
                 }
                 else{
                     
                     console.error('Pick up not allowed more than 1 day from the reservation date - 1')
                     this.pickUpError = true
-                    
+
                 }
             }
             else{
