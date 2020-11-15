@@ -242,7 +242,8 @@ const store = new Vuex.Store({
         lastname: form.lastname,
         driveremail: form.email,
         phoneno: form.phoneno,
-        location: form.location,
+        pickuplocation: form.pickuplocation,
+        dropofflocation: form.dropofflocation,
         carType: form.carType,
         pickupdate: form.pickupdate,
         dropoffdate: form.dropoffdate

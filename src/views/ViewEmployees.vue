@@ -15,8 +15,8 @@
                     <p v-if= "employeeDetailsEmail === employee.email"> <strong>Email:</strong> {{ employee.email }}</p>
                     <p v-if= "employeeDetailsEmail === employee.email"> <strong>Phone No:</strong> {{ employee.phoneno }} </p>
                     <ul class="align-right" v-if= "employeeDetailsEmail === employee.email">
-                        <li><a> Change Reservation </a></li>
-                        <li><a class="a-critical"> Cancel Reservation </a></li>
+                        <li><a> Modify Employee Details </a></li>
+                        <li><a class="a-critical"> Delete Employee </a></li>
                     </ul>
                     <a v-if= "employeeDetailsEmail === employee.email" v-on:click="toggleShow(employee)"> Less </a>
                     <a v-else v-on:click="toggleShow(employee)"> More </a>
