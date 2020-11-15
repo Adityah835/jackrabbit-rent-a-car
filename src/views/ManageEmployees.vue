@@ -1,9 +1,9 @@
 <template>
     <div id = "dashboard">
         <section>
-            <div>
+            <div class = "col2">
                 <h2>Welcome {{userProfile.firstname}}! </h2>
-                <h4> Use below links to add/modify employee information </h4>    
+                <h4> Use below links to add or view employee information </h4>    
             </div>
         </section>
     

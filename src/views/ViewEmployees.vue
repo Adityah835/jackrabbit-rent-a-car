@@ -1,6 +1,5 @@
 <template>
     <section>
-        
         <div id = "dashboard">
             <div class = "col1">
                 <h1>Hi {{userProfile.firstname}}! Below are the current employees</h1>
@@ -14,10 +13,6 @@
                     <p v-if= "employee.isEmployee"> <strong> Account Type: </strong> Employee </p>
                     <p v-if= "employeeDetailsEmail === employee.email"> <strong>Email:</strong> {{ employee.email }}</p>
                     <p v-if= "employeeDetailsEmail === employee.email"> <strong>Phone No:</strong> {{ employee.phoneno }} </p>
-                    <ul class="align-right" v-if= "employeeDetailsEmail === employee.email">
-                        <li><a> Modify Employee Details </a></li>
-                        <li><a class="a-critical"> Delete Employee </a></li>
-                    </ul>
                     <a v-if= "employeeDetailsEmail === employee.email" v-on:click="toggleShow(employee)"> Less </a>
                     <a v-else v-on:click="toggleShow(employee)"> More </a>
                 </div>            
@@ -34,14 +29,12 @@
 </template>
 <script>
 import {mapState} from 'vuex'
-
 export default {
     computed:{
         ...mapState(['userProfile', 'employees'])
     },
     data(){
         return {
-            //showDeleteReservation: false,
             employeeDetailsEmail: '',
         }
     },
@@ -60,3 +53,21 @@ export default {
 }
 
 </script>
+<style lang="scss">
+    .p-critical{
+        color: tomato;
+        font-size: 12px;
+    }
+    .a-critical 
+    {
+        font-family: 'Open Sans', sans-serif;
+        text-decoration: none;
+        color: rgb(255, 0, 0);
+        margin: 0;
+        cursor: pointer;
+        
+        &:hover {
+            color: lighten(rgb(255, 0, 0), 25%);
+        }
+    }
+</style>

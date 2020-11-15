@@ -16,7 +16,7 @@ const store = new Vuex.Store({
     tempReserve: [],
     carInventory: [],
     pickUpCarInventory: [],
-    employees: []
+    employees: [],
   },
   mutations: {
     setUserProfile(state, val) {
