@@ -8,7 +8,7 @@
             <div v-if = "pickUpCarInventory.length">
                 <div v-for = "(pickUpCarInvent, index) in pickUpCarInventory" :key="index" :title="pickUpCarInvent.plateNo" class = "post">
                     <h5> {{pickUpCarInvent.make}} {{pickUpCarInvent.model}} </h5>
-                    <p> <strong> $ {{pickUpCarInvent.rentRate}} </strong> </p>
+                    <p> <strong> $ {{pickUpCarInvent.rentRate}}.00 / day </strong> </p>
                     <p> <strong> Color : </strong> {{pickUpCarInvent.color}} </p>
                     <p> <strong> Location : </strong> {{pickUpCarInvent.location}} </p>
                     <p> <strong> Type : </strong> {{pickUpCarInvent.type}} </p>

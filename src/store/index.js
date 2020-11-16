@@ -70,8 +70,10 @@ const store = new Vuex.Store({
         state.pickUpCarInventory = []
 
         val.forEach(function(doc){
-          if(state.tempReserve.location == doc.data().location){
+          
+          if(state.tempReserve.pickuplocation == doc.data().location){
             state.pickUpCarInventory.push(doc.data())
+
           }
         })
       }
