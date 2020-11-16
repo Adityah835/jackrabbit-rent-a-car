@@ -2,7 +2,8 @@
 
 ## Project setup
 ```
-npm install
+npm install -g @vue/cli
+npm i firebase
 ```
 
 ### Compiles and hot-reloads for development
