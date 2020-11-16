@@ -74,7 +74,7 @@
                     </select>
                 </div>
                 <div class="extras">
-                    <button @click="newReservation()" class="button">Reserve Ride</button>
+                    <button @click="newReservation()" class="button">Reserve Ride (Pay Later) </button>
                     <p> </p>
                     <router-link to="/rent-cars">Back to Rent Cars Dashboard</router-link>
                 </div>

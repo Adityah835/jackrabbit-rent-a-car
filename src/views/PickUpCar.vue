@@ -5,14 +5,27 @@
                 <h3>Jackrabbit-Rent-A-Car PickUp</h3>
                 <h5>Select from one of the cars at your reservation location</h5>
             </div>
-            <div v-if = "pickUpCarInventory.length">
-                <div v-for = "(pickUpCarInvent, index) in pickUpCarInventory" :key="index" :title="pickUpCarInvent.plateNo" class = "post">
+            <div v-if = "preferredPickUpCarInventory.length">
+                <h5 class = "col1"> Preferred car type: {{tempReserve.carType}} </h5>
+                <div v-for = "(pickUpCarInvent, index) in preferredPickUpCarInventory" :key="index" class = "post">
                     <h5> {{pickUpCarInvent.make}} {{pickUpCarInvent.model}} </h5>
                     <p> <strong> $ {{pickUpCarInvent.rentRate}}.00 / day </strong> </p>
                     <p> <strong> Color : </strong> {{pickUpCarInvent.color}} </p>
                     <p> <strong> Location : </strong> {{pickUpCarInvent.location}} </p>
                     <p> <strong> Type : </strong> {{pickUpCarInvent.type}} </p>
-                    <p> <button class="button4"> Select </button> </p>
+                    <p> <button @click="proceedToPay()" class="button4"> Select </button> </p>
+                </div>
+            </div>
+            <p>. </p>
+            <div v-if = "otherPickUpCarInventory.length">
+                <h5 class = "col1"> Other car types </h5>
+                <div v-for = "(pickUpCarInvent, index) in otherPickUpCarInventory" :key="index" class = "post">
+                    <h5> {{pickUpCarInvent.make}} {{pickUpCarInvent.model}} </h5>
+                    <p> <strong> $ {{pickUpCarInvent.rentRate}}.00 / day </strong> </p>
+                    <p> <strong> Color : </strong> {{pickUpCarInvent.color}} </p>
+                    <p> <strong> Location : </strong> {{pickUpCarInvent.location}} </p>
+                    <p> <strong> Type : </strong> {{pickUpCarInvent.type}} </p>
+                    <p> <button @click="proceedToPay()" class="button4"> Select </button> </p>
                 </div>
             </div>
         </div>
@@ -20,10 +33,16 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import router from '../router'
 export default {
     computed:{
-        ...mapState(['pickUpCarInventory']),
+        ...mapState(['tempReserve','otherPickUpCarInventory', 'preferredPickUpCarInventory']),
         
+    },
+    methods:{
+        proceedToPay(){
+            router.push('/payment')
+        }
     }
 
 }

@@ -110,6 +110,22 @@ const routes = [
     meta:{
       requiresAuth: true
     }
+  },
+  {
+    path: '/payment',
+    name: 'Payment Page',
+    component: () => import(/* webpackChunkName: "payment" */ '../views/Payment.vue'),
+    meta:{
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/payment-success',
+    name: 'Payment Success',
+    component: () => import(/* webpackChunkName: "payment-success" */ '../views/PaymentSuccess.vue'),
+    meta:{
+      requiresAuth: true
+    }
   }
 ]
 

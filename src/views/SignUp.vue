@@ -105,7 +105,7 @@ export default {
                 this.LastNameErrorMsg = 'Last Name too short! Must be atleast 2 characters'
             }
             else if(!this.signupForm.firstname.match(letters)){
-                this.FirstNameErrorMsg = 'First Name must only contain letters'
+                this.LastNameErrorMsg = 'Last Name must only contain letters'
             }
         },
         IsTitleValid(){

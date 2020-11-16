@@ -99,7 +99,7 @@ export default {
                     console.log('Pick up allowed')
                     this.pickUpError = false
                     this.$store.commit('setTempReserve', reserve)
-                    this.$store.dispatch('setPickUpInventory')
+                    this.$store.dispatch('setPickUpInventory', reserve)
                 }
                 else{
                     

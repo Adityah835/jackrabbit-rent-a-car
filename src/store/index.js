@@ -15,7 +15,8 @@ const store = new Vuex.Store({
     reservations: [],
     tempReserve: [],
     carInventory: [],
-    pickUpCarInventory: [],
+    preferredPickUpCarInventory: [],
+    otherPickUpCarInventory: [],
     employees: [],
   },
   mutations: {
@@ -61,21 +62,31 @@ const store = new Vuex.Store({
       }
     },
     setPickUpCarInventory(state, val){
+
       if(val.length == 0){
-        state.pickUpCarInventory = []
+        
+        state.preferredPickUpCarInventory = []
+        state.otherPickUpCarInventory = []
       }
       else
       {
         
-        state.pickUpCarInventory = []
+        state.preferredPickUpCarInventory = []
+        state.otherPickUpCarInventory = []
 
         val.forEach(function(doc){
           
-          if(state.tempReserve.pickuplocation == doc.data().location){
-            state.pickUpCarInventory.push(doc.data())
+          if(state.tempReserve.carType == doc.data().type){
+
+            state.preferredPickUpCarInventory.push(doc.data())
 
           }
+          else{
+
+            state.otherPickUpCarInventory.push(doc.data())
+          }
         })
+
       }
     },
     setEmployees(state, val){
@@ -267,15 +278,18 @@ const store = new Vuex.Store({
       })
       .catch(() => console.error('there is an error in setInventory in store/index.js'))
     },
-    async setPickUpInventory({commit}){
-      await fb.inventory.get()
+    async setPickUpInventory({commit}, reserve){
+      await fb.inventory.where('location', '==', reserve.pickuplocation)
+      .get()
       .then(function(querySnapshot) {
-        
+       
         commit('setPickUpCarInventory', querySnapshot)
 
         router.push('/pick-up-car')
+
       })
-      .catch(() => console.error('there is an error in setInventory in store/index.js'))
+      .catch((error) => {console.error('there is an error in setPickUpInventory in store/index.js')
+                         console.error(error)})
     },
     async setViewEmployees({commit}){
       
